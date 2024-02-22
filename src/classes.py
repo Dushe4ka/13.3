@@ -14,6 +14,11 @@ class Category:
         Category.total_numbers_of_category += 1
         Category.unique_products += 1
 
+    def __str__(self):
+        return f"{self.title}, количество продуктов: {Category.__len__(self)} шт."
+
+    def __len__(self):
+        return len(self.__products)
     def get_name(self):
         return self.title
 
@@ -35,8 +40,6 @@ class Category:
         self.__products.append(value)
 
 
-
-
 class Product:
     title: str
     description: str
@@ -49,6 +52,14 @@ class Product:
         self.__price = price
         self.quantity_in_stock = quantity_in_stock
 
+    def __str__(self):
+        return f'{self.name}, {self.price} руб. Остаток: {self.quantity_in_stock} шт.'
+
+    def __len__(self):
+        return self.quantity_in_stock
+
+    def __add__(self, other):
+        return self.__price * self.quantity_in_stock + other.__price * other.quantity_in_stock
 
     def get_title(self):
         return self.name
@@ -84,4 +95,3 @@ class Product:
         new_product['name'], new_product['description'], new_product['price'], new_product['quantity']
 
         return cls(**new_product)
-
